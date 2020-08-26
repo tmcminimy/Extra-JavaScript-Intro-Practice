@@ -591,6 +591,11 @@ const airports = [
 /* TASK 1 🚀 
 // Dollars to Euros - write a function that will take an amount of dollars (USD) and change it  into euros (EUR) - with the current exchange rate 1 USD === .85 EUR */
 
+function euroXchange(number){
+  var USD = number; 
+  return (USD * .85);
+}
+console.log(euroXchange(10)); /* This returns 8.5 */
 
 /* TASK 2 🚀 
 // Take the function above a step further - you have dollars and you are visiting the following 5 countries: Britan, Germany, Turkey, Bulgaria and Ukraine - you need to write a function that will take a dollar amount, and a country and return the exchange rate for that country - the function should return a string that says `your exchange rate for dollarAmount dollars in country will be exchangeRate currencyInitals ` If the country is not on your list your string should return 'that country is not on your list'
@@ -600,32 +605,140 @@ const airports = [
 // 1 usd === 1.66 Bulgarian Lev 
 // 1 usd === 27.7 Ukrainian hryvnia */
 
+const currencyStuff = [
+  {'country': 'Britain',
+  'currency': 'pounds',
+  'abbreviation': 'GBP',
+  'exchange_rate_1_USD': 0.77
+},
+{'country': 'Germany',
+  'currency': 'Euros',
+  'abbreviation': 'EUR',
+  'exchange_rate_1_USD': 0.85
+},
+{'country': 'Turkey',
+'currency': 'Lira',
+'abbreviation': 'TL',
+'exchange_rate_1_USD': 6.96
+},
+{'country': 'Bulgaria',
+'currency': 'Lev',
+'abbreviation': 'BGN',
+'exchange_rate_1_USD': 1.66
+},
+{'country': 'Ukraine',
+  'currency': 'Hryvnia',
+  'abbreviation': 'HRN',
+  'exchange_rate_1_USD': 27.7
+},
+]
+
+function currentsy(usd, country){
+  var usd = usd;
+  for (let i = 0; i < currencyStuff.length; i++){
+    if (currencyStuff[i].country == country){
+      return `Your exchange rate for ${usd} dollars in ${currencyStuff[i].country} is ${currencyStuff[i].exchange_rate_1_USD * usd} ${currencyStuff[i].abbreviation}`;
+    }
+  }
+}
+console.log(currentsy(5, 'Bulgaria'));
+console.log(currentsy(5, 'Ukraine'));
+console.log(currentsy(5, 'Britain'));
+
+
+  
 
 /*TASK 3 🚀
 /// Write a function that takes an airport code and returns the city, country of that airport 
 // find the following codes AAA, ABZ, ABX, ABT, ACA */
 
+function getLocation(array, code){
+  for (let i = 0; i < array.length; i++){
+    if (array[i].code == code){
+      return `The airport with code ${array[i].code} is located in ${array[i].city}, ${array[i].country}`
+    }
+  }
+}
+console.log(getLocation(airports, 'AAA'));
+console.log(getLocation(airports, 'ABZ'));
+console.log(getLocation(airports, 'ABX'));
+console.log(getLocation(airports, 'ABT'));
+console.log(getLocation(airports, 'ACA'));
+/* if(array[i] == city){
+  console.log(array[i].name)
+}
+
+function airportsGetter(array){
+  for (let i = 0; i < array.length; i++){
+    console.log(array[i].country)
+  }
+}
+airportsGetter(airports); */
+/* function getInd(array, index){
+  return `The airport at index ${index} is ${array[index].code}, located in ${array[index].city}, ${array[index].country}`;
+}
+console.log(getInd(airports, 7)); */
+
+
 
 /*TASK 4 🚀 
 // Write a function to that will find the phone number for an airport in a given city  */
 
-
+function getNumber(array, city){
+  for (let i = 0; i < array.length; i++){
+    if (array[i].city == city){
+      return `The phone number for your local airport in ${array[i].city} is ${array[i].phone}`
+    }
+  }
+}
+console.log(getNumber(airports, 'Acapulco'));
 
 /*TASK 5 🚀 
 // Write a function that will return all the airports in a given country  */
-
+function portsByCountry(array, country){
+  for (let i = 0; i < array.length; i++){
+    if (array[i].country === country){
+      return `${array[i].name}`;
+    }
+  }
+}
+console.log(portsByCountry(airports, 'United States'));
 
 
 /*TASK 6 🚀 
 // Write a function that takes and airport name and returns the airport code
 // find the code for the following airports: Al Baha Airport, Ambler Airport, Abuja International Airport*/
-
-
+function portCodes(array, name){
+  for (let i = 0; i < array.length; i++){
+    if (array[i].name == name){
+      return `${array[i].code}`;
+    }
+  }
+}
+console.log(portCodes(airports, 'Al Baha Airport'));
+console.log(portCodes(airports, 'Ambler Airport'));
+console.log(portCodes(airports, 'Abuja International Airport'));
 
 /*TASK 7 🚀
 // Write a function that takes an airport code and returns the number of direct flights available */
-
-
+function flightsAvailable(array, code){
+  for (let i = 0; i < array.length; i++){
+    if (array[i].code == code){
+      return `Number of direct flights available: ${array[i].direct_flights}`;
+    }
+  }
+}
+console.log(flightsAvailable(airports, 'AAA'));
+console.log(flightsAvailable(airports, 'AAT'));
+console.log(flightsAvailable(airports, 'ABK'));
 
 /*TASK 8 🚀
 // Find out what your flight options are - write a function that returns a new array of all the country names in a set of data*/
+function where2Fly(array){
+  const flites = [];
+  for(let i = 0; i < array.length; i++){
+    flites.push(array[i].country);
+  }
+  console.log(flites);
+}
+console.log(where2Fly(airports));
